@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -63,5 +65,40 @@ public class ServerResource {
                         .data(Map.of("server", serverService.createServer(server)))
                         .build()
         );
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Response> getServer(@PathVariable Long id) {
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timestamp(LocalDateTime.now())
+                        .successMessage("Successfully fetched server")
+                        .statusCode(HttpStatus.OK.value())
+                        .status(HttpStatus.OK)
+                        .data(Map.of("server", serverService.getServer(id)))
+                        .build()
+        );
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Response> deleteServer(@PathVariable Long id) {
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timestamp(LocalDateTime.now())
+                        .successMessage("Successfully deleted server")
+                        .statusCode(HttpStatus.OK.value())
+                        .status(HttpStatus.OK)
+                        .data(Map.of("server", serverService.deleteServer(id)))
+                        .build()
+        );
+    }
+
+    @GetMapping(path = "/image/{fileName}", produces = "image/png")
+    public byte[] getServerImage(@PathVariable String fileName) throws IOException {
+        // Return image bytes
+        return Files.readAllBytes(
+                Paths.get(System.getProperty("user.home") + "/Java/images/" + fileName)
+        );
+
     }
 }
