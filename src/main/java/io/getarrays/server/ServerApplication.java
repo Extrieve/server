@@ -15,20 +15,20 @@ public class ServerApplication {
 		SpringApplication.run(ServerApplication.class, args);
 	}
 
-	@Bean
-	private CommandLineRunner run(ServerRepository serverRepository) {
-		return args ->
-			serverRepository.save(
-					Server
-							.builder()
-							.ipAddress("192.168.0.1")
-							.hostname("server1")
-							.memory("8GB")
-							.type("Arch Linux")
-							.status(Status.SERVER_UP)
-							.imageUrl("http://localhost:8080/server/images/server1.png")
-							.build()
-			);
-
-	}
+//	@Bean
+//	public CommandLineRunner run(ServerRepository serverRepository) {
+//		return args ->
+//			serverRepository.save(
+//					Server
+//							.builder()
+//							.ipAddress("192.168.0.1")
+//							.hostname("server1")
+//							.memory("8GB")
+//							.type("Arch Linux")
+//							.status(Status.SERVER_UP)
+//							.imageUrl("http://localhost:8080/server/images/server1.png")
+//							.build()
+//			);
+//
+//	}
 }
