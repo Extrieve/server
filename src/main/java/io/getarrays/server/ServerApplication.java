@@ -6,6 +6,7 @@ import io.getarrays.server.model.ServerRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class ServerApplication {
@@ -14,6 +15,7 @@ public class ServerApplication {
 		SpringApplication.run(ServerApplication.class, args);
 	}
 
+	@Bean
 	private CommandLineRunner run(ServerRepository serverRepository) {
 		return args ->
 			serverRepository.save(
