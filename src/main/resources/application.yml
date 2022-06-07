@@ -1,16 +1,30 @@
+#spring:
+#  datasource:
+#    username: extrieve
+#    password: password
+#    hostname: 127.0.0.1
+#    port: 3306
+#    url: jdbc:mysql://
+#    driverClassName: com.mysql.jdbc.Driver
+#  jpa:
+#    hibernate:
+#      ddl-auto: create
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.MySQL8Dialect
+#        show_sql: true
+#        format_sql: true
+
 spring:
+  h2:
+    console:
+      enabled: 'true'
   datasource:
-    username: extrieve
+    username: sa
     password: password
-    hostname: 127.0.0.1
-    port: 3306
-    url: jdbc:mysql://
-    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:h2:mem:serverapp
+    driverClassName: org.h2.Driver
   jpa:
-    hibernate:
-      ddl-auto: create
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
-        show_sql: true
-        format_sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+server:
+  port: '8080'
