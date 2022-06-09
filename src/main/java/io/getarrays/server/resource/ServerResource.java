@@ -36,6 +36,19 @@ public class ServerResource {
         );
     }
 
+    @GetMapping("/pretty")
+    public ResponseEntity<Response> getServersPretty(){
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timestamp(LocalDateTime.now())
+                        .statusCode(HttpStatus.OK.value())
+                        .status(HttpStatus.OK)
+                        .successMessage("Successfully fetched servers")
+                        .data(Map.of("servers", serverService.prettyList(10)))
+                        .build()
+        );
+    }
+
     @GetMapping("/ping/{ipAddress}")
     public ResponseEntity<Response> pingServer(@PathVariable String ipAddress) throws IOException {
         Server server = serverService.pingServer(ipAddress);

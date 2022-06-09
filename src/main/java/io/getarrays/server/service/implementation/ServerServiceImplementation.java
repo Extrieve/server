@@ -5,8 +5,8 @@ import io.getarrays.server.model.ServerRepository;
 import io.getarrays.server.service.ServerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -44,6 +44,19 @@ public class ServerServiceImplementation implements ServerService {
     public Collection<Server> list(int limit) {
         log.info("Listing servers");
         return serverRepository.findAll(PageRequest.of(0, limit)).toList();
+    }
+
+    @Override
+    public List<String> prettyList(int limit) {
+        log.info("Listing servers pretty");
+        List<Server> servers = serverRepository.findAll(PageRequest.of(0, limit)).toList();
+        List<String> prettyServers = new ArrayList<String>();
+        servers.forEach(server -> {
+            server.toString();
+            JSONObject serverJSON = new JSONObject(server);
+            prettyServers.add(serverJSON.toString(4));
+        });
+        return prettyServers;
     }
 
     @Override
