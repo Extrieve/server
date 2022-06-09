@@ -14,10 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.net.InetAddress;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import static io.getarrays.server.enumeration.Status.SERVER_DOWN;
 import static io.getarrays.server.enumeration.Status.SERVER_UP;
@@ -58,6 +55,12 @@ public class ServerServiceImplementation implements ServerService {
         });
         return prettyServers;
     }
+
+    @Override
+    public int serverQuantity() {
+        return (int) serverRepository.count();
+    }
+
 
     @Override
     public Server getServer(Long id) {
